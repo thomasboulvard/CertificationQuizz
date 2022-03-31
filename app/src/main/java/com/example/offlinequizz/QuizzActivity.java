@@ -67,10 +67,6 @@ public class QuizzActivity extends AppCompatActivity {
         // Get the question and the different options
         questions.setText((currentQuestionPosition+1) + "/" + questionsLists.size());
         question.setText(questionsLists.get(0).getQuestion());
-        option1.setText(questionsLists.get(0).getOption1());
-        option2.setText(questionsLists.get(0).getOption2());
-        option3.setText(questionsLists.get(0).getOption3());
-        option4.setText(questionsLists.get(0).getOption4());
 
         // The option 1 is selected by the User
         option1.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +82,6 @@ public class QuizzActivity extends AppCompatActivity {
 
                     revealAnswer();
 
-                    questionsLists.get(currentQuestionPosition).setUserSelectedAnswer(selectedOptionByUser);
                 }
             }
         });
@@ -105,7 +100,6 @@ public class QuizzActivity extends AppCompatActivity {
 
                     revealAnswer();
 
-                    questionsLists.get(currentQuestionPosition).setUserSelectedAnswer(selectedOptionByUser);
                 }
             }
         });
@@ -124,7 +118,6 @@ public class QuizzActivity extends AppCompatActivity {
 
                     revealAnswer();
 
-                    questionsLists.get(currentQuestionPosition).setUserSelectedAnswer(selectedOptionByUser);
                 }
             }
         });
@@ -143,7 +136,6 @@ public class QuizzActivity extends AppCompatActivity {
 
                     revealAnswer();
 
-                    questionsLists.get(currentQuestionPosition).setUserSelectedAnswer(selectedOptionByUser);
                 }
             }
         });
@@ -201,10 +193,7 @@ public class QuizzActivity extends AppCompatActivity {
 
             questions.setText((currentQuestionPosition + 1) + "/" + questionsLists.size());
             question.setText(questionsLists.get(currentQuestionPosition).getQuestion());
-            option1.setText(questionsLists.get(currentQuestionPosition).getOption1());
-            option2.setText(questionsLists.get(currentQuestionPosition).getOption2());
-            option3.setText(questionsLists.get(currentQuestionPosition).getOption3());
-            option4.setText(questionsLists.get(currentQuestionPosition).getOption4());
+
         }
         else {
             Intent intent = new Intent(QuizzActivity.this, QuizzResults.class);
@@ -271,12 +260,8 @@ public class QuizzActivity extends AppCompatActivity {
 
         for (int i=0; i<questionsLists.size();i++) {
 
-            final String getUSerSelectedAnswer = questionsLists.get(i).getUserSelectedAnswer();
-            final String getAnswer = questionsLists.get(i).getAnswer();
+            final List<String> getAnswer = questionsLists.get(i).getAnswer();
 
-            if (getUSerSelectedAnswer.equals(getAnswer)){
-                correctAnswers++;
-            }
         }
 
         return correctAnswers;
@@ -288,12 +273,8 @@ public class QuizzActivity extends AppCompatActivity {
 
         for (int i=0; i<questionsLists.size();i++) {
 
-            final String getUSerSelectedAnswer = questionsLists.get(i).getUserSelectedAnswer();
-            final String getAnswer = questionsLists.get(i).getAnswer();
+            final List<String> getAnswer = questionsLists.get(i).getAnswer();
 
-            if (!getUSerSelectedAnswer.equals(getAnswer)){
-                correctAnswers++;
-            }
         }
 
         return correctAnswers;
@@ -310,7 +291,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     private void revealAnswer() {
 
-        final String getAnswer = questionsLists.get(currentQuestionPosition).getAnswer();
+        final List<String> getAnswer = questionsLists.get(currentQuestionPosition).getAnswer();
 
         if (option1.getText().toString().equals(getAnswer)) {
             option1.setBackgroundResource(R.drawable.round_back_green10);
